@@ -1,0 +1,197 @@
+================================================================================
+WINDOWS POWERSHELL - QUICK START COMMANDS (Copy & Paste Ready)
+================================================================================
+
+LOCATION: C:\Users\nihar\Desktop\driver-monitoring
+
+YOUR CURRENT ERROR:
+  ❌ "can't open file 'C:\\Users\\nihar\\Desktop\\driver-monitoring\\src\\main.py'"
+  ❌ "ModuleNotFoundError: No module named 'src'"
+
+WHY: Missing files + Python path issue
+
+SOLUTION: 3 Steps
+================================================================================
+
+STEP 1: PLACE FILES IN YOUR PROJECT
+────────────────────────────────────────────────────────────────────────────
+
+Download these 4 files and place them:
+
+1. requirements.txt       → C:\Users\nihar\Desktop\driver-monitoring\
+2. conftest.py           → C:\Users\nihar\Desktop\driver-monitoring\
+3. main.py               → C:\Users\nihar\Desktop\driver-monitoring\src\
+4. test_pipeline.py      → C:\Users\nihar\Desktop\driver-monitoring\
+
+After copying, verify:
+   Get-ChildItem -Name  # Should show requirements.txt, conftest.py, test_pipeline.py
+   Get-ChildItem src/   # Should show main.py inside src folder
+
+
+STEP 2: ACTIVATE VIRTUAL ENVIRONMENT
+────────────────────────────────────────────────────────────────────────────
+
+Copy & Paste in PowerShell:
+
+.\.venv\Scripts\Activate.ps1
+
+If error about execution policy, first run:
+
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+Then: .\.venv\Scripts\Activate.ps1
+
+Expected: You'll see (.venv) prefix in prompt
+Example: (.venv) PS C:\Users\nihar\Desktop\driver-monitoring>
+
+
+STEP 3: INSTALL & RUN
+────────────────────────────────────────────────────────────────────────────
+
+Install dependencies (copy & paste):
+
+pip install -r requirements.txt
+
+Verify everything works (copy & paste):
+
+python test_pipeline.py
+
+Expected output: "✅ ALL MODULES VERIFIED SUCCESSFULLY"
+
+Run with webcam (copy & paste):
+
+python src/main.py --source 0
+
+Press Q to quit
+
+
+================================================================================
+COMPLETE COMMANDS REFERENCE
+================================================================================
+
+# Activate virtual environment
+.\.venv\Scripts\Activate.ps1
+
+# Deactivate (when done)
+deactivate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Quick verification (no webcam needed)
+python test_pipeline.py
+
+# Run with webcam (source 0 = default camera)
+python src/main.py --source 0
+
+# Run with different camera (if source 0 doesn't work)
+python src/main.py --source 1
+
+# Run with video file
+python src/main.py --source "C:\path\to\video.mp4"
+
+# Run and save output
+python src/main.py --source 0 --output results.mp4
+
+# Run and save to custom database
+python src/main.py --source 0 --db my_session.db
+
+# Run all unit tests
+pytest tests/ -v
+
+# Run tests with coverage report
+pytest tests/ -v --cov=src --cov-report=html
+
+# Run specific test
+pytest tests/test_detector.py -v
+
+# If imports still fail, try:
+pytest tests/ -v --import-mode=importlib
+
+
+================================================================================
+FILE PLACEMENT VERIFICATION
+================================================================================
+
+In PowerShell, verify files are in correct places:
+
+# Check root directory
+ls *.txt
+ls *.py
+# Should show: requirements.txt, conftest.py, test_pipeline.py
+
+# Check src folder
+ls src/
+# Should show: main.py (NEW!), preprocessing.py, risk_scoring.py, etc.
+
+# Check tests folder
+ls tests/
+# Should show: test_*.py files
+
+
+================================================================================
+KEYBOARD SHORTCUTS WHILE RUNNING
+================================================================================
+
+When python src/main.py is running:
+
+Q  → Quit (stop the program)
+P  → Pause/Resume (toggle pause)
+
+
+================================================================================
+TROUBLESHOOTING - COMMON ERRORS
+================================================================================
+
+ERROR: "ModuleNotFoundError: No module named 'src'"
+FIX: Make sure conftest.py is in project root
+
+ERROR: "can't open file 'src\main.py'"
+FIX: Make sure main.py is in src/ folder
+
+ERROR: "ModuleNotFoundError: No module named 'mediapipe'"
+FIX: pip install mediapipe==0.10.11 -U
+
+ERROR: "The term '.\.venv\Scripts\Activate.ps1' is not recognized"
+FIX: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+     Then: .\.venv\Scripts\Activate.ps1
+
+ERROR: Webcam shows black/frozen screen
+FIX: Try different camera: python src/main.py --source 1
+
+ERROR: "pip: command not found"
+FIX: Use full path: python -m pip install -r requirements.txt
+
+
+================================================================================
+EXPECTED RESULTS
+================================================================================
+
+After python test_pipeline.py:
+  ✓ Preprocessing works
+  ✓ Low-light enhancement works
+  ✓ Detection works
+  ✓ Temporal analysis works
+  ✓ Risk scoring works
+  ✓ Warning system works
+  ✅ ALL MODULES VERIFIED SUCCESSFULLY
+
+When running python src/main.py --source 0:
+  - Real-time video window opens
+  - Risk level bar at top (green/orange/red)
+  - Metrics at bottom (EAR, MAR, score)
+  - Database auto-populated
+
+
+================================================================================
+CONTACT/HELP
+================================================================================
+
+For more details, see SETUP_CHECKLIST.md
+
+Version: 1.0
+Updated: September 6, 2026
+Project: Context-Aware Driver Risk Assessment
+Team: Niharika (23CSEC34), Binayak, Amar | SIST
+
+================================================================================
